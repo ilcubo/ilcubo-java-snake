@@ -41,16 +41,7 @@ public class Game extends Canvas {
     }
 
     public void update(long deltaTime) {
-        if (gameOver) {
-            gc.setFill(Color.BLACK);
-            gc.fillRect(0, 0, WIDTH, HEIGHT);
-            gc.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-            gc.setFill(Color.WHITE);
-            gc.fillText("GAME OVER", WIDTH / 2 - 80, HEIGHT / 2 - 30);
-            gc.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-            gc.fillText("Score: " + score, WIDTH / 2 - 30, HEIGHT / 2);
-            return;
-        }
+
         if (timePassed > 0) {
             timePassed -= deltaTime;
             return;
@@ -64,7 +55,6 @@ public class Game extends Canvas {
             System.out.println(score);
             placeApple();
         }
-        draw();
 
         if (hitWall() || hitSelf()) {
             setOnKeyPressed(this::onKeyPressedGameOver);
@@ -86,7 +76,18 @@ public class Game extends Canvas {
         }
     }
 
-    private void draw() {
+    public void render() {
+        if (gameOver) {
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0, 0, WIDTH, HEIGHT);
+            gc.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+            gc.setFill(Color.WHITE);
+            gc.fillText("GAME OVER", WIDTH / 2 - 80, HEIGHT / 2 - 30);
+            gc.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+            gc.fillText("Score: " + score, WIDTH / 2 - 30, HEIGHT / 2);
+            return;
+        }
+
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         drawSnake();
         drawApple();
@@ -129,7 +130,7 @@ public class Game extends Canvas {
         Random rand = new Random();
         applePos.setX(rand.nextInt(16));
         applePos.setY(rand.nextInt(16));
-        draw();
+//        draw();
     }
 
     private void drawApple() {

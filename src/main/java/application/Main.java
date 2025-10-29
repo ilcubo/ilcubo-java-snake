@@ -31,6 +31,7 @@ public class Main extends Application {
                 long currentTimeMillis = System.currentTimeMillis();
                 long deltaTimeMillis = currentTimeMillis - lastTimeMillis;
                 game.update(deltaTimeMillis);
+                game.render();
                 lastTimeMillis = currentTimeMillis;
             }
         };
